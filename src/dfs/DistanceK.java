@@ -18,7 +18,7 @@ public class DistanceK {
 		Map<TreeNode , TreeNode> map = new HashMap<>();
 		map.putIfAbsent(new TreeNode(1), null);
 		System.out.println(map.size());
-		distanceK(root, root.left, 1);
+		distanceK(root, root.left, 2);
 	}
 		public static Map<TreeNode, TreeNode> parent = new HashMap<>();
 		
@@ -35,7 +35,7 @@ public class DistanceK {
 		        	TreeNode node = queue.poll();
 		        	set.add(node);
 	        		if(node.left!= null && !set.contains(node.left)){
-	        			queue.add(node.right);
+	        			queue.add(node.left);
 	        		}
 	        		
 	        		if(node.right!= null && !set.contains(node.right)){
@@ -50,13 +50,15 @@ public class DistanceK {
 	        		count--;
 	        	
 	        	
+	        }
 	        	dis++;
+
 	        }
-	        }
+	        System.out.println(res);
 	        return res;
 	   }
 	   public static void dfs(TreeNode root, TreeNode par){
-		   if(root == null || par == null)
+		   if(root == null)
 			   return;
 		   System.out.println(root.val);
 		   parent.putIfAbsent(root, par);
