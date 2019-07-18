@@ -13,9 +13,7 @@ public class InMemoryFileSystem {
 		List<String> res = new ArrayList<String>();
 		String[] parts = path.split("/");
 		if(parts.length ==0 ) {
-			res.addAll(root.subDirectories.keySet());
-			res.addAll(root.files.keySet());
-			res.sort(String::compareToIgnoreCase);
+			addAllNamesToResult(res, root);
 			return res;
 		}
 		
@@ -28,9 +26,7 @@ public class InMemoryFileSystem {
 				current = current.subDirectories.get(parts[i]);
 				if(i == parts.length-1)
 				{
-					res.addAll(root.subDirectories.keySet());
-					res.addAll(root.files.keySet());
-					res.sort(String::compareToIgnoreCase);
+					addAllNamesToResult(res, current);
 					return res;
 				}
 				continue;
@@ -49,6 +45,15 @@ public class InMemoryFileSystem {
 			throw new Exception("Invalid path");
 		}
 		return res;
+	}
+	// Create directory
+	public void mkdir(String path) {
+		
+	}
+	private void addAllNamesToResult(List<String> res, Directory dir) {
+		res.addAll(dir.subDirectories.keySet());
+		res.addAll(dir.files.keySet());
+		res.sort(String::compareToIgnoreCase);
 	}
 
 }
